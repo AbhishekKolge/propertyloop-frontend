@@ -1,6 +1,6 @@
-# Propertyloop Front End using Next JS
+# Propertyloop Frontend using Next JS
 
-It is a front end for Propertyloop web application. It is an app where user can register as tenant or landlord and post or apply for a property.
+It is a frontend for Propertyloop web application. It is an app where user can register as tenant or landlord and post or apply for a property.
 
 ## Demo
 
