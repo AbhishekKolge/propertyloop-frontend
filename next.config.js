@@ -6,6 +6,10 @@ const nextConfig = {
     ENV: 'production',
     ACCESS_TOKEN_EXPIRATION_TIME: '86400000',
     TIME_BUFFER: '300000',
+    TENANT_EMAIL: 'test-tenant@gmail.com',
+    LANDLORD_EMAIL: 'test-landlord@gmail.com',
+    TENANT_PASSWORD: 'Test@123',
+    LANDLORD_PASSWORD: 'Test@123',
   },
 };
 

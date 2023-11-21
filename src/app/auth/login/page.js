@@ -77,6 +77,18 @@ const Login = (props) => {
     },
   });
 
+  const setTenantCredentialsHandler = () => {
+    loginFormik.setFieldValue('email', process.env.TENANT_EMAIL);
+    loginFormik.setFieldValue('password', process.env.TENANT_PASSWORD);
+    loginFormik.submitForm();
+  };
+
+  const setLandlordCredentialsHandler = () => {
+    loginFormik.setFieldValue('email', process.env.LANDLORD_EMAIL);
+    loginFormik.setFieldValue('password', process.env.LANDLORD_PASSWORD);
+    loginFormik.submitForm();
+  };
+
   return (
     <section className='h-full grid justify-center items-center'>
       <Card className='w-[350px] md:w-[450px]'>
@@ -132,6 +144,28 @@ const Login = (props) => {
                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />
               )}
               Sign In
+            </Button>
+            <Button
+              type='button'
+              variant='outline'
+              onClick={setTenantCredentialsHandler}
+              disabled={loginIsLoading || loginIsSuccess}
+            >
+              {loginIsLoading && (
+                <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+              )}
+              Sign In Tenant
+            </Button>
+            <Button
+              type='button'
+              variant='outline'
+              onClick={setLandlordCredentialsHandler}
+              disabled={loginIsLoading || loginIsSuccess}
+            >
+              {loginIsLoading && (
+                <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+              )}
+              Sign In Landlord
             </Button>
             <div className='relative'>
               <div className='absolute inset-0 flex items-center'>
