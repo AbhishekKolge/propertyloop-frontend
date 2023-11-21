@@ -80,13 +80,11 @@ const Login = (props) => {
   const setTenantCredentialsHandler = () => {
     loginFormik.setFieldValue('email', process.env.TENANT_EMAIL);
     loginFormik.setFieldValue('password', process.env.TENANT_PASSWORD);
-    loginFormik.submitForm();
   };
 
   const setLandlordCredentialsHandler = () => {
     loginFormik.setFieldValue('email', process.env.LANDLORD_EMAIL);
     loginFormik.setFieldValue('password', process.env.LANDLORD_PASSWORD);
-    loginFormik.submitForm();
   };
 
   return (
@@ -154,7 +152,7 @@ const Login = (props) => {
               {loginIsLoading && (
                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />
               )}
-              Sign In Tenant
+              Set Tenant
             </Button>
             <Button
               type='button'
@@ -165,7 +163,7 @@ const Login = (props) => {
               {loginIsLoading && (
                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />
               )}
-              Sign In Landlord
+              Set Landlord
             </Button>
             <div className='relative'>
               <div className='absolute inset-0 flex items-center'>
