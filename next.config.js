@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    BASE_URL: 'http://127.0.0.1:8000/api/v1',
-    ENV: 'development',
+    BASE_URL: 'https://propertyloop-backend-production.up.railway.app/api/v1',
+    ENV: 'production',
     ACCESS_TOKEN_EXPIRATION_TIME: '86400000',
     TIME_BUFFER: '300000',
   },
