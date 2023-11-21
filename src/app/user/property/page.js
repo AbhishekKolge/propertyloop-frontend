@@ -307,7 +307,7 @@ const Property = () => {
         />
       </div>
       {propertyIsLoading || propertyIsFetching ? (
-        <div className='grid grid-cols-4 gap-8'>
+        <div className='grid grid-col-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
           {new Array(12).fill(0).map((item, index) => {
             return <PropertyCardLoading key={index} />;
           })}

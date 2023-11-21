@@ -15,6 +15,7 @@ const logoutHandler = (config) => {
     removeAuthCookie();
     dispatch(authActions.logout());
     !config?.isSession && toast.error('Logged out');
+    dispatch(apiSlice.util.resetApiState());
   };
 };
 
