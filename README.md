@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Propertyloop Front End using Next JS
 
-## Getting Started
+It is a front end for Propertyloop web application. It is an app where user can register as tenant or landlord and post or apply for a property.
 
-First, run the development server:
+## Demo
+
+link: https://propertyloop-frontend.vercel.app/
+
+## API Reference
+
+https://api.postman.com/collections/17221325-06a0b71e-8c06-4e64-9a19-5be31e337888?access_key=PMAT-01HFSBFCWDDXRMEYPH9H5GYBFS
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/AbhishekKolge/propertyloop-frontend.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project root directory
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+  cd propertyloop-frontend
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Change BASE_URL inside next.config.js as per requirement (default is https://propertyloop-backend-production.up.railway.app/api/v1)
+You might face CORS error with default BASE_URL
 
-## Learn More
+Install dependencies using NPM
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+  npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Start the development server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+  npm run dev
+```
 
-## Deploy on Vercel
+Open http://localhost:3000 with your browser to see the result.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Build application for production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npm run build
+```
+
+Run build application Locally
+
+```bash
+npm Start
+```
