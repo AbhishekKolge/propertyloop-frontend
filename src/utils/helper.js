@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import toast from 'react-hot-toast';
 
-import { UNITS, THROTTLE } from './defaults';
+import { UNITS } from './defaults';
 
 const omitEmptyKeys = (obj, excludes = []) =>
   _.omitBy(obj, (value, key) => {

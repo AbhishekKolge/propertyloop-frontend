@@ -18,6 +18,7 @@ import {
 } from '@/features/property/propertyApiSlice';
 
 import { omitEmptyKeys } from '@/utils/helper';
+import { useDebounce } from '@/hooks/optimization';
 
 const propertyValidationSchema = Yup.object({
   name: Yup.string()
@@ -55,6 +56,7 @@ const initialQueryFilterState = {
 const initialPropertyState = {
   totalPages: 0,
   firstRender: true,
+  search: '',
 };
 
 const queryFilterReducer = (state, action) => {
@@ -117,6 +119,18 @@ const propertyReducer = (state, action) => {
     return {
       ...state,
       firstRender: false,
+    };
+  }
+  if (action.type === 'SEARCH') {
+    return {
+      ...state,
+      search: action.search,
+    };
+  }
+  if (action.type === 'RESET_SEARCH') {
+    return {
+      ...state,
+      search: '',
     };
   }
   return initialPropertyState;
@@ -211,6 +225,8 @@ const Property = () => {
   let totalPageNumber = propertyData?.totalPages;
   let propertyList = propertyData?.results;
 
+  const debounceSearch = useDebounce(dispatchQueryFilter);
+
   const nextPageHandler = () => {
     if (queryFilterState.pageNumber < totalPageNumber) {
       dispatchQueryFilter({
@@ -231,11 +247,18 @@ const Property = () => {
 
   const searchHandler = (e) => {
     const search = e.target.value;
-    dispatchQueryFilter({ type: 'SEARCH', search });
+    debounceSearch({ type: 'SEARCH', search });
+    dispatchProperty({
+      type: 'SEARCH',
+      search,
+    });
   };
 
   const resetFilterHandler = () => {
     dispatchQueryFilter({ type: 'RESET_FILTERS' });
+    dispatchProperty({
+      type: 'RESET_SEARCH',
+    });
   };
 
   const statusHandler = (value) => {
@@ -294,6 +317,7 @@ const Property = () => {
         onSort={sortHandler}
         onFurnishStatus={furnishStatusHandler}
         filters={queryFilterState}
+        search={propertyState.search}
       />
       <div className='flex justify-end'>
         <PropertyForm

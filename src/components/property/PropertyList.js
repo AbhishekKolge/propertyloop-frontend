@@ -9,6 +9,8 @@ import PropertyCardLoading from './PropertyCardLoading';
 
 import { useGetAllPropertiesQuery } from '@/features/property/propertyApiSlice';
 
+import { useDebounce } from '@/hooks/optimization';
+
 const initialQueryFilterState = {
   search: '',
   furnishStatus: '',
@@ -20,6 +22,7 @@ const initialQueryFilterState = {
 const initialPropertyState = {
   totalPages: 0,
   firstRender: true,
+  search: '',
 };
 
 const queryFilterReducer = (state, action) => {
@@ -84,6 +87,18 @@ const propertyReducer = (state, action) => {
       firstRender: false,
     };
   }
+  if (action.type === 'SEARCH') {
+    return {
+      ...state,
+      search: action.search,
+    };
+  }
+  if (action.type === 'RESET_SEARCH') {
+    return {
+      ...state,
+      search: '',
+    };
+  }
   return initialPropertyState;
 };
 
@@ -114,6 +129,8 @@ const PropertyList = (props) => {
     propertyList = results;
   }
 
+  const debounceSearch = useDebounce(dispatchQueryFilter);
+
   const nextPageHandler = () => {
     if (queryFilterState.pageNumber < totalPageNumber) {
       dispatchQueryFilter({
@@ -134,7 +151,11 @@ const PropertyList = (props) => {
 
   const searchHandler = (e) => {
     const search = e.target.value;
-    dispatchQueryFilter({ type: 'SEARCH', search });
+    debounceSearch({ type: 'SEARCH', search });
+    dispatchProperty({
+      type: 'SEARCH',
+      search,
+    });
     dispatchProperty({
       type: 'DISABLE_FIRST_RENDER',
     });
@@ -142,6 +163,9 @@ const PropertyList = (props) => {
 
   const resetFilterHandler = () => {
     dispatchQueryFilter({ type: 'RESET_FILTERS' });
+    dispatchProperty({
+      type: 'RESET_SEARCH',
+    });
     dispatchProperty({
       type: 'DISABLE_FIRST_RENDER',
     });
@@ -197,6 +221,7 @@ const PropertyList = (props) => {
         onSort={sortHandler}
         onFurnishStatus={furnishStatusHandler}
         filters={queryFilterState}
+        search={propertyState.search}
       />
       {(propertyIsLoading || propertyIsFetching) &&
       !propertyState.firstRender ? (

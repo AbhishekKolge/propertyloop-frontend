@@ -11,8 +11,15 @@ import {
 } from '@/components/ui/select';
 
 const PropertyFilterCard = (props) => {
-  const { onSearch, onReset, onStatus, onFurnishStatus, onSort, filters } =
-    props;
+  const {
+    onSearch,
+    onReset,
+    onStatus,
+    onFurnishStatus,
+    onSort,
+    filters,
+    search,
+  } = props;
 
   return (
     <Card className='w-full'>
@@ -27,7 +34,7 @@ const PropertyFilterCard = (props) => {
               id='search'
               placeholder='Property name or location'
               onChange={onSearch}
-              value={filters.search}
+              value={search}
             />
           </div>
           <div className='flex flex-col space-y-1.5'>

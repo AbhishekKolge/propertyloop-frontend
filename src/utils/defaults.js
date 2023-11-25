@@ -14,6 +14,8 @@ const PAGE_SIZE = 12;
 
 const THROTTLE = 5000;
 
+const DEBOUNCE_TIME = 1000;
+
 export {
   DROPZONE_IMAGE_FORMAT,
   IMAGE_EXTENSIONS,
@@ -21,4 +23,5 @@ export {
   UNITS,
   PAGE_SIZE,
   THROTTLE,
+  DEBOUNCE_TIME,
 };

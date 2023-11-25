@@ -1,22 +1,12 @@
-import { useRef, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import _debounce from 'lodash/debounce';
 
-const DEBOUNCE_TIME = 1000;
+import { DEBOUNCE_TIME } from '@/utils/defaults';
 
 const useDebounce = (callback) => {
-  const ref = useRef();
-
-  useEffect(() => {
-    ref.current = callback;
-  }, [callback]);
-
   const debouncedCallback = useMemo(() => {
-    const func = () => {
-      ref.current?.();
-    };
-
-    return _debounce(func, DEBOUNCE_TIME);
-  }, []);
+    return _.debounce(callback, DEBOUNCE_TIME);
+  }, [callback]);
 
   return debouncedCallback;
 };
