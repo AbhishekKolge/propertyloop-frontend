@@ -66,7 +66,7 @@ const Navbar = () => {
 
   return (
     <nav className='w-full fixed top-0 inset-x-0 z-10 bg-primary'>
-      <div className="max-w-7xl flex justify-between items-center">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
         <h1 className='text-2xl md:text-4xl'>
           <Link href='/'>Propertyloop</Link>
         </h1>
