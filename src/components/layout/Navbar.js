@@ -65,7 +65,7 @@ const Navbar = () => {
   }, [pathname]);
 
   return (
-    <nav className='w-full fixed top-0 inset-x-0 z-10 flex justify-between items-center bg-white'>
+    <nav className='w-full fixed top-0 inset-x-0 z-10 flex justify-between items-center bg-primary'>
       <h1 className='text-2xl md:text-4xl'>
         <Link href='/'>Propertyloop</Link>
       </h1>
