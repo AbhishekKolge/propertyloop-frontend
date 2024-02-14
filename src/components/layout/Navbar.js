@@ -65,73 +65,75 @@ const Navbar = () => {
   }, [pathname]);
 
   return (
-    <nav className='w-full fixed top-0 inset-x-0 z-10 flex justify-between items-center bg-primary'>
-      <h1 className='text-2xl md:text-4xl'>
-        <Link href='/'>Propertyloop</Link>
-      </h1>
-      <Sheet open={showSideMenu} onOpenChange={setShowSideMenu}>
-        <SheetTrigger asChild>
-          <Button variant='outline'>
-            <Menu />
-          </Button>
-        </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle>Options</SheetTitle>
-          </SheetHeader>
-          <div className='grid gap-4 py-4'>
-            {auth.isLoggedIn === null &&
-              (isAuthPage ? (
+    <nav className='w-full fixed top-0 inset-x-0 z-10 bg-primary'>
+      <div className="max-w-7xl flex justify-between items-center">
+        <h1 className='text-2xl md:text-4xl'>
+          <Link href='/'>Propertyloop</Link>
+        </h1>
+        <Sheet open={showSideMenu} onOpenChange={setShowSideMenu}>
+          <SheetTrigger asChild>
+            <Button variant='outline'>
+              <Menu />
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Options</SheetTitle>
+            </SheetHeader>
+            <div className='grid gap-4 py-4'>
+              {auth.isLoggedIn === null &&
+                (isAuthPage ? (
+                  <div className='flex flex-col items-center gap-5'>
+                    <Skeleton className='h-8 w-full' />
+                    <Skeleton className='h-8 w-full' />
+                  </div>
+                ) : (
+                  <div className='flex flex-col items-center gap-5'>
+                    <Skeleton className='h-[40px] w-[40px] md:h-[100px] md:w-[100px] rounded-full' />
+                    <Skeleton className='h-8 w-[120px]' />
+                    <Skeleton className='h-8 w-[120px]' />
+                    <Skeleton className='h-8 w-full' />
+                  </div>
+                ))}
+  
+              {auth.isLoggedIn ? (
                 <div className='flex flex-col items-center gap-5'>
-                  <Skeleton className='h-8 w-full' />
-                  <Skeleton className='h-8 w-full' />
+                  <Avatar className='md:h-[100px] md:w-[100px]'>
+                    <AvatarImage
+                      className='object-cover '
+                      src={auth.profileImage}
+                      alt={`@${auth.name}`}
+                    />
+                    <AvatarFallback className='uppercase'>
+                      {getInitials(auth.name)}
+                    </AvatarFallback>
+                  </Avatar>
+                  <Link href='/user/profile'>Profile</Link>
+                  {auth.role === 'landlord' && (
+                    <Link href='/user/property'>My Properties</Link>
+                  )}
+                  {auth.role === 'tenant' && (
+                    <Link href='/user/application'>My Applications</Link>
+                  )}
+                  <Button className='w-full' onClick={logoutAccountHandler}>
+                    {logoutIsLoading && (
+                      <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                    )}
+                    Logout
+                  </Button>
                 </div>
               ) : (
-                <div className='flex flex-col items-center gap-5'>
-                  <Skeleton className='h-[40px] w-[40px] md:h-[100px] md:w-[100px] rounded-full' />
-                  <Skeleton className='h-8 w-[120px]' />
-                  <Skeleton className='h-8 w-[120px]' />
-                  <Skeleton className='h-8 w-full' />
-                </div>
-              ))}
-
-            {auth.isLoggedIn ? (
-              <div className='flex flex-col items-center gap-5'>
-                <Avatar className='md:h-[100px] md:w-[100px]'>
-                  <AvatarImage
-                    className='object-cover '
-                    src={auth.profileImage}
-                    alt={`@${auth.name}`}
-                  />
-                  <AvatarFallback className='uppercase'>
-                    {getInitials(auth.name)}
-                  </AvatarFallback>
-                </Avatar>
-                <Link href='/user/profile'>Profile</Link>
-                {auth.role === 'landlord' && (
-                  <Link href='/user/property'>My Properties</Link>
-                )}
-                {auth.role === 'tenant' && (
-                  <Link href='/user/application'>My Applications</Link>
-                )}
-                <Button className='w-full' onClick={logoutAccountHandler}>
-                  {logoutIsLoading && (
-                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-                  )}
-                  Logout
-                </Button>
-              </div>
-            ) : (
-              auth.isLoggedIn === false && (
-                <div className='flex flex-col items-center gap-5'>
-                  <Link href='/auth/login'>Login</Link>
-                  <Link href='/auth/sign-up'>Register</Link>
-                </div>
-              )
-            )}
-          </div>
-        </SheetContent>
-      </Sheet>
+                auth.isLoggedIn === false && (
+                  <div className='flex flex-col items-center gap-5'>
+                    <Link href='/auth/login'>Login</Link>
+                    <Link href='/auth/sign-up'>Register</Link>
+                  </div>
+                )
+              )}
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
     </nav>
   );
 };
